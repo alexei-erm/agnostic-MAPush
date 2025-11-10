@@ -11,8 +11,8 @@ python ./openrl_ws/update_config.py --filepath $script_dir/config.py
 
 if [ $test_mode = False ]; then
     # train
-    num_envs=200
-    num_steps=150000000
+    num_envs=500
+    num_steps=130000000
     checkpoint=/None  # "/results/07-28-13_task1/checkpoints/rl_model_100000000_steps/module.pt"
 
     python ./openrl_ws/train.py  --num_envs $num_envs --train_timesteps $num_steps\
@@ -24,7 +24,7 @@ if [ $test_mode = False ]; then
     --use_tensorboard \
     --checkpoint $current_dir$checkpoint \
     --headless \
-    --hidden_size 512 \
+    --hidden_size 256 \
     --layer_N 2
 
     # calculate success rate
@@ -49,12 +49,16 @@ if [ $test_mode = False ]; then
 else
 # test
 root_dir=$(dirname "$script_dir")
-filename="rl_model_110000000_steps/module.pt"
+filename="rl_model_130000000_steps/module.pt"
 test_checkpoint="$root_dir/checkpoints/$filename"
 python ./openrl_ws/test.py --num_envs 1 \
         --algo "$algo" \
         --task go1push_mid \
         --checkpoint "$test_checkpoint" \
         --test_mode viewer \
-#       --record_video
+        --record_video \
+        # --headless \
+
+        # --seed 1 \
+
 fi

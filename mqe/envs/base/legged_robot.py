@@ -71,6 +71,8 @@ class LeggedRobot(BaseTask):
         self.height_samples = None
         self.debug_viz = getattr(self.cfg.viewer, "debug_viz", False)
         self.record_now = False
+        self.recording_episodes_target = 1  # Default to 1 episode
+        self.recording_episodes_count = 0
         self.init_done = False
         self._parse_cfg(self.cfg)
         super().__init__(self.cfg, sim_params, physics_engine, sim_device, headless)
@@ -1178,7 +1180,8 @@ class LeggedRobot(BaseTask):
         self.complete_video_frames = []
 
     def _render_headless(self):
-        if self.record_now and self.complete_video_frames is not None and len(self.complete_video_frames) == 0:
+        # Allow recording even when complete_video_frames is not empty (for multi-episode recording)
+        if self.record_now and self.complete_video_frames is not None:
             # bx, by, bz = self.root_states[self.cfg.env.record_actor_id, 0], self.root_states[self.cfg.env.record_actor_id, 1], self.root_states[self.cfg.env.record_actor_id, 2]
             # target_loc = [bx, by , bz]
             # cam_distance = [0, -1.0, 1.0]
@@ -1186,10 +1189,12 @@ class LeggedRobot(BaseTask):
             self.video_frame = self.rendering_camera.get_observation()
             self.video_frames.append(self.video_frame)
 
-    def start_recording(self):
+    def start_recording(self, num_episodes=1):
         print("start recording")
         self.complete_video_frames = []
         self.record_now = True
+        self.recording_episodes_target = num_episodes  # Track how many episodes to record
+        self.recording_episodes_count = 0  # Track completed episodes
 
     def pause_recording(self):
         print("pause recording")
@@ -1207,9 +1212,23 @@ class LeggedRobot(BaseTask):
             if self.complete_video_frames is None:
                 self.complete_video_frames = []
             else:
-                print("Successfully store the video of last episode")
-                self.complete_video_frames = self.video_frames[:]
-            self.video_frames = []
+                # Increment episode counter if recording
+                if hasattr(self, 'recording_episodes_count') and self.record_now:
+                    self.recording_episodes_count += 1
+                    print(f"Stored episode {self.recording_episodes_count}/{self.recording_episodes_target}")
+
+                    # Only move to complete_video_frames when all episodes are done
+                    if self.recording_episodes_count >= self.recording_episodes_target:
+                        print("All episodes recorded, finalizing video...")
+                        self.complete_video_frames = self.video_frames[:]
+                        self.video_frames = []
+                        self.record_now = False  # Stop recording
+                    # Otherwise keep accumulating frames (don't clear video_frames or set complete_video_frames)
+                else:
+                    # Original single-episode behavior
+                    print("Successfully store the video of last episode")
+                    self.complete_video_frames = self.video_frames[:]
+                    self.video_frames = []
 
     def _create_terrain(self):
         mesh_type = self.cfg.terrain.mesh_type

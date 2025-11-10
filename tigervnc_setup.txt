@@ -1,0 +1,154 @@
+=====================================================
+TigerVNC Virtual Desktop Setup (With GLX Support)
+Copy and paste these commands
+=====================================================
+
+# 1. Stop RealVNC service (we'll use TigerVNC instead)
+sudo systemctl stop vncserver-x11-serviced
+sudo systemctl disable vncserver-x11-serviced
+
+# 2. Install required packages
+sudo apt-get update
+sudo apt-get install -y tigervnc-standalone-server tigervnc-xorg-extension mesa-utils
+
+# 3. Set VNC password
+vncpasswd
+
+# 4. Create VNC startup script (this is what runs when VNC starts)
+mkdir -p ~/.vnc
+cat > ~/.vnc/xstartup << 'EOF'
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+export XKL_XMODMAP_DISABLE=1
+export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export XDG_SESSION_DESKTOP=ubuntu
+export XDG_SESSION_TYPE=x11
+exec dbus-launch --exit-with-session gnome-session
+EOF
+
+# 5. Make it executable
+chmod +x ~/.vnc/xstartup
+
+# 6. Create VNC config for better performance and GLX
+cat > ~/.vnc/config << 'EOF'
+geometry=1920x1080
+dpi=96
+EOF
+
+# 7. Start VNC server with GLX support
+vncserver :1 -localhost no -geometry 1920x1080 -depth 24
+
+# 8. Check if it's running
+ps aux | grep vnc
+
+# 9. Get connection info
+echo "============================================"
+echo "VNC Server Started!"
+echo "Connect to: $(hostname -I | awk '{print $1}'):5901"
+echo "Use the password you set with vncpasswd"
+echo "============================================"
+
+=====================================================
+TESTING GLX (After connecting via VNC):
+=====================================================
+
+# Once connected, open terminal in VNC and run:
+echo $DISPLAY          # Should show :1
+glxinfo | grep "direct rendering"   # Should show: Yes
+
+# Then try running Isaac Gym test!
+
+=====================================================
+TO STOP VNC:
+vncserver -kill :1
+
+TO START AGAIN:
+vncserver :1 -localhost no -geometry 1920x1080 -depth 24
+=====================================================
+
+
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ vncpasswd
+VNC(R) Password Utility 7.12.0 (r14) x64 (Jun 12 2024 11:46:53)
+Copyright (C) RealVNC Ltd.
+RealVNC and VNC are trademarks of RealVNC Ltd and are protected by trademark
+registrations and/or pending trademark applications in the European Union,
+United States of America and other jurisdictions.
+Protected by UK patent 2481870; US patent 8760366; EU patent 2652951.
+See https://www.realvnc.com for information on VNC.
+For third party acknowledgements see:
+https://www.realvnc.com/docs/7/foss.html
+OS: Ubuntu 22.04, Linux 6.8.0, amd64
+
+Usage: vncpasswd [OPTION...] MODE
+
+Mode:
+  -user       Set the password for VNC Server in User Mode.
+  -service    Set the password for VNC Server in Service Mode.
+  -virtual    Set the password for VNC Server in Virtual Mode.
+  -file FILE  Set the password in the file FILE.
+  -print      Print the password to the console in a form suitable for
+              configuration files and policy templates.
+
+Options:
+  -type TYPE  Set the password of type TYPE. VNC Server may support various
+              types of password, including "ViewOnlyPassword",
+              "AdminPassword", "GuestPassword", and
+              "InputOnlyPassword". The default is "Password".
+  -weakpwd    Permit the setting of a weak password (less than 6 characters).
+              Not recommended.
+  -legacy     Set the password using the legacy plaintext-equivalent
+              (obfuscated) form, rather than as a salted hash.
+              Not recommended.
+  -check      Check that the password matches the stored password instead of
+              setting it.  MODE cannot be -print
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ mkdir -p ~/.vnc
+cat > ~/.vnc/xstartup << 'EOF'
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+export XKL_XMODMAP_DISABLE=1
+export XDG_CURRENT_DESKTOP=ubuntu:GNOME
+export XDG_SESSION_DESKTOP=ubuntu
+export XDG_SESSION_TYPE=x11
+exec dbus-launch --exit-with-session gnome-session
+EOF
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ chmod +x ~/.vnc/xstartup
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ cat > ~/.vnc/config << 'EOF'
+geometry=1920x1080
+dpi=96
+EOF
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ vncserver :1 -localhost no -geometry 1920x1080 -depth 24
+
+See https://www.realvnc.com for information on VNC.
+
+To start an instance of VNC Server in Virtual Mode, run the following command:
+
+  vncserver-virtual
+
+To start the VNC Server in Virtual Mode daemon, run the following command as
+root:
+
+  /etc/vnc/vncservice start vncserver-virtuald
+
+To start VNC Server in Service Mode, run the following command as root:
+
+  /etc/vnc/vncservice start vncserver-x11-serviced
+
+To start VNC Server in User Mode, run the following command:
+
+  vncserver-x11
+
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ ps aux | grep vnc
+gvlab      22229  0.0  0.0  14108  4864 pts/0    S+   18:18   0:00 grep --color=auto vnc
+(mapush) gvlab@gvlab-desktop:~/agnostic-MAPush$ echo "============================================"
+echo "VNC Server Started!"
+echo "Connect to: $(hostname -I | awk '{print $1}'):5901"
+echo "Use the password you set with vncpasswd"
+echo "============================================"
+============================================
+VNC Server Started!
+Connect to: 10.9.73.9:5901
+Use the password you set with vncpasswd
+============================================
+

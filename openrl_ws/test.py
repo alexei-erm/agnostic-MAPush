@@ -13,8 +13,14 @@ import os
 from pathlib import Path
 import numpy as np
 import torch
+import random
 
 import cv2
+
+# ============== HARDCODED CONFIG ==============
+SEED = 5  # Set your desired seed here
+NUM_EPISODES = 3  # Number of consecutive episodes to record in one video
+# ==============================================
 
 
 def save_video(frames, fps, filename="output.mp4"): 
@@ -103,6 +109,9 @@ def save_gif(frames, fps, filename="output.gif"):
     print(f"GIF created successfully at {absolute_path}")
 
 args = get_args()
+# Inject hardcoded seed into args (will be used by make_mqe_env's set_seed call)
+args.seed = SEED
+print(f"Using seed: {SEED}")
 env, _ = make_env(args, custom_cfg(args))
 net = PPONet(env, device="cuda")  # Create neural network.
 agent = PPOAgent(net)  # Initialize the agent.
@@ -156,23 +165,74 @@ if test_mode == "calculator":
 elif test_mode=="viewer":
     if args.record_video:
         running_count = 0
-        env.start_recording()
+        # Unwrap all the way to the actual legged_robot environment
+        actual_env = env
+        while hasattr(actual_env, 'env'):
+            actual_env = actual_env.env
+
+        # Monkey-patch store_recording to support multi-episode recording
+        original_store_recording = actual_env.store_recording
+        actual_env._recording_episodes_target = NUM_EPISODES
+        actual_env._recording_episodes_count = 0
+        actual_env._all_video_frames = []  # Accumulate frames across episodes
+
+        def multi_episode_store_recording(env_ids):
+            """Modified store_recording that accumulates frames across multiple episodes"""
+            if actual_env.cfg.env.record_video and 0 in env_ids:
+                if len(actual_env.video_frames) > 0:
+                    actual_env._recording_episodes_count += 1
+                    print(f"Stored episode {actual_env._recording_episodes_count}/{actual_env._recording_episodes_target} ({len(actual_env.video_frames)} frames)")
+
+                    # Accumulate all frames
+                    actual_env._all_video_frames.extend(actual_env.video_frames)
+                    actual_env.video_frames = []
+
+                    # Only finalize when all episodes are done
+                    if actual_env._recording_episodes_count >= actual_env._recording_episodes_target:
+                        print(f"All {actual_env._recording_episodes_target} episodes recorded! Total frames: {len(actual_env._all_video_frames)}")
+                        actual_env.complete_video_frames = actual_env._all_video_frames[:]
+                        actual_env.record_now = False
+
+        # Replace the method
+        actual_env.store_recording = multi_episode_store_recording
+
+        # Also patch _render_headless to always record when record_now is True
+        # Use object.__setattr__ to bypass gym's private attribute protection
+        def patched_render_headless():
+            """Patched render that records regardless of complete_video_frames state"""
+            if actual_env.record_now and actual_env.complete_video_frames is not None:
+                actual_env.rendering_camera.set_position(actual_env.cfg.viewer.pos, actual_env.cfg.viewer.lookat)
+                actual_env.video_frame = actual_env.rendering_camera.get_observation()
+                actual_env.video_frames.append(actual_env.video_frame)
+
+        object.__setattr__(actual_env, '_render_headless', patched_render_headless)
+
+        # Start recording
+        actual_env.complete_video_frames = []
+        actual_env.video_frames = []
+        actual_env.record_now = True
+        print(f"Recording {NUM_EPISODES} consecutive episodes...")
         while True:
-            action, _ = agent.act(obs) 
+            action, _ = agent.act(obs)
             obs, r, done, info = env.step(action)
             if done.all():
                 running_count += 1
                 if torch.all(env.finished_buf):
-                    print("success")
+                    print(f"Episode {running_count}/{NUM_EPISODES}: success")
                 else:
-                    print("fail")
-            if running_count == 1:
-                frames = env.get_complete_frames()
-                video_array = np.concatenate([np.expand_dims(frame, axis=0) for frame in frames ], axis=0).swapaxes(1, 3).swapaxes(2, 3)
-                print(video_array.shape)
-                print(np.mean(video_array))
-                # save_gif(video_array, 1 / env.dt, filename="test.gif")
-                save_video(video_array, 1 / env.dt, filename="test.mp4")
+                    print(f"Episode {running_count}/{NUM_EPISODES}: fail")
+            if running_count == NUM_EPISODES:
+                print(f"Completed {NUM_EPISODES} episodes. Processing video...")
+                # Wait a moment to ensure last episode is stored
+                frames = actual_env.get_complete_frames()
+                if len(frames) == 0:
+                    print("WARNING: No frames captured! Check if recording is working properly.")
+                else:
+                    video_array = np.concatenate([np.expand_dims(frame, axis=0) for frame in frames ], axis=0).swapaxes(1, 3).swapaxes(2, 3)
+                    print(f"Video shape: {video_array.shape}")
+                    print(f"Video mean: {np.mean(video_array)}")
+                    # save_gif(video_array, 1 / env.dt, filename="test.gif")
+                    save_video(video_array, 1 / env.dt, filename=f"test_seed{SEED}_{NUM_EPISODES}eps.mp4")
                 break
     else:
         while True:

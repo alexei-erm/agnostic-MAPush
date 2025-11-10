@@ -1,0 +1,60 @@
+=====================================================
+RealVNC Virtual Mode Setup Commands
+Copy and paste these commands one by one
+=====================================================
+
+# 1. Set VNC password (you'll be prompted to enter password twice)
+vncpasswd
+
+# 2. Create config directory
+mkdir -p ~/.vnc/config.d
+
+# 3. Create user VNC config
+cat > ~/.vnc/config.d/vncserver-x11 << 'EOF'
+Authentication=VncAuth
+Encryption=PreferOn
+IdleTimeout=0
+EOF
+
+# 4. Create system-wide config (requires sudo password)
+sudo mkdir -p /etc/vnc/config.d
+sudo tee /etc/vnc/config.d/common.custom > /dev/null << 'EOF'
+Authentication=VncAuth
+Encryption=PreferOn
+IdleTimeout=0
+EOF
+
+# 5. Restart VNC service
+sudo systemctl restart vncserver-x11-serviced
+
+# 6. Check if it's running
+sudo systemctl status vncserver-x11-serviced
+
+# 7. Check for any errors
+journalctl -u vncserver-x11-serviced -n 30 --no-pager
+
+# 8. Get your IP address for connecting
+echo "Connect to: $(hostname -I | awk '{print $1}'):5900"
+
+=====================================================
+After running these, try connecting with RealVNC Viewer!
+=====================================================
+
+● vncserver-x11-serviced.service - VNC Server in Service Mode daemon
+     Loaded: loaded (/lib/systemd/system/vncserver-x11-serviced.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-11-10 18:14:47 JST; 11s ago
+   Main PID: 21405 (vncserver-x11-s)
+      Tasks: 2 (limit: 38216)
+     Memory: 2.2M
+        CPU: 20ms
+     CGroup: /system.slice/vncserver-x11-serviced.service
+             ├─21405 /usr/bin/vncserver-x11-serviced -fg
+             └─21407 /usr/bin/vncserver-x11-core -service
+
+11月 10 18:14:47 gvlab-desktop systemd[1]: Started VNC Server in Service Mode daemon.
+11月 10 18:14:47 gvlab-desktop vncserver-x11[21407]: ServerManager: Server started
+11月 10 18:14:47 gvlab-desktop vncserver-x11[21407]: ConsoleDisplay: Cannot find a running X server on vt2
+~
+~
+~
+
