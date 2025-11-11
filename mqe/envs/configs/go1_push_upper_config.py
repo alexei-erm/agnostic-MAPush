@@ -87,7 +87,7 @@ class Go1PushUpperCfg(Go1Cfg):
     # velocity control
     class control(Go1Cfg.control):
         control_type = 'C'
-        command_network_path = "./resources/command_nets/1.2x1.2.pt"
+        command_network_path = "./results/11-07-17_cuboid/checkpoints/rl_model_130000000_steps/module.pt"
 
     # termination conditions
     class termination(Go1Cfg.termination):
