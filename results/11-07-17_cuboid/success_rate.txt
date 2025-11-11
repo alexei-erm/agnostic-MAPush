@@ -1537,3 +1537,608 @@ Traceback (most recent call last):
   File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
     assert path.exists(), f"{path} does not exist"
 AssertionError: /home/gvlab/newMAPush/results/11-07-17_cuboid/checkpoints/rl_model_150000000_steps/module.pt does not exist
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_10000000_steps/module.pt
+success rate: 0.22333334386348724
+finished time: 18.35726547241211
+collision degree: 0.0
+collaboration degree: 0.003424413502216339
+success rate: 0.22333334386348724
+finished time: 18.35726547241211
+collision degree: 0.0
+collaboration degree: 0.003424413502216339
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_20000000_steps/module.pt
+success rate: 0.5699999928474426
+finished time: 14.026200294494629
+collision degree: 0.0
+collaboration degree: 0.028527433052659035
+success rate: 0.5699999928474426
+finished time: 14.026200294494629
+collision degree: 0.0
+collaboration degree: 0.028527433052659035
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_30000000_steps/module.pt
+success rate: 0.800000011920929
+finished time: 11.000199317932129
+collision degree: 0.0
+collaboration degree: 0.014906642027199268
+success rate: 0.800000011920929
+finished time: 11.000199317932129
+collision degree: 0.0
+collaboration degree: 0.014906642027199268
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_40000000_steps/module.pt
+success rate: 0.9000000357627869
+finished time: 8.90719985961914
+collision degree: 0.0
+collaboration degree: 0.009495719335973263
+success rate: 0.9000000357627869
+finished time: 8.90719985961914
+collision degree: 0.0
+collaboration degree: 0.009495719335973263
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_50000000_steps/module.pt
+success rate: 0.9233333468437195
+finished time: 8.067132949829102
+collision degree: 0.0
+collaboration degree: 0.02228868380188942
+success rate: 0.9233333468437195
+finished time: 8.067132949829102
+collision degree: 0.0
+collaboration degree: 0.02228868380188942
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_60000000_steps/module.pt
+success rate: 0.8866667151451111
+finished time: 8.840466499328613
+collision degree: 0.0
+collaboration degree: 0.14810755848884583
+success rate: 0.8866667151451111
+finished time: 8.840466499328613
+collision degree: 0.0
+collaboration degree: 0.14810755848884583
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_70000000_steps/module.pt
+success rate: 0.9200000166893005
+finished time: 8.049399375915527
+collision degree: 0.0
+collaboration degree: 0.2243373692035675
+success rate: 0.9200000166893005
+finished time: 8.049399375915527
+collision degree: 0.0
+collaboration degree: 0.2243373692035675
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_80000000_steps/module.pt
+success rate: 0.9166666865348816
+finished time: 7.305400371551514
+collision degree: 0.0
+collaboration degree: 0.1959657371044159
+success rate: 0.9166666865348816
+finished time: 7.305400371551514
+collision degree: 0.0
+collaboration degree: 0.1959657371044159
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_90000000_steps/module.pt
+success rate: 0.9100000262260437
+finished time: 7.0742669105529785
+collision degree: 0.0
+collaboration degree: 0.19993482530117035
+success rate: 0.9100000262260437
+finished time: 7.0742669105529785
+collision degree: 0.0
+collaboration degree: 0.19993482530117035
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_100000000_steps/module.pt
+success rate: 0.9100000262260437
+finished time: 7.166800498962402
+collision degree: 0.0
+collaboration degree: 0.21412447094917297
+success rate: 0.9100000262260437
+finished time: 7.166800498962402
+collision degree: 0.0
+collaboration degree: 0.21412447094917297
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_110000000_steps/module.pt
+success rate: 0.9166666865348816
+finished time: 6.9586005210876465
+collision degree: 0.0
+collaboration degree: 0.2161809802055359
+success rate: 0.9166666865348816
+finished time: 6.9586005210876465
+collision degree: 0.0
+collaboration degree: 0.2161809802055359
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_120000000_steps/module.pt
+success rate: 0.9300000071525574
+finished time: 6.459666728973389
+collision degree: 0.0
+collaboration degree: 0.20161500573158264
+success rate: 0.9300000071525574
+finished time: 6.459666728973389
+collision degree: 0.0
+collaboration degree: 0.20161500573158264
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+---------------------------------------------------------------------------
+Loaded checkpoint from:  /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid//checkpoints/rl_model_130000000_steps/module.pt
+success rate: 0.9333333373069763
+finished time: 6.28266716003418
+collision degree: 0.0
+collaboration degree: 0.22282850742340088
+success rate: 0.9333333373069763
+finished time: 6.28266716003418
+collision degree: 0.0
+collaboration degree: 0.22282850742340088
+-----------------------------------------------------
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+Traceback (most recent call last):
+  File "./openrl_ws/test.py", line 132, in <module>
+    agent.load(args.checkpoint)
+  File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
+    assert path.exists(), f"{path} does not exist"
+AssertionError: /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid/checkpoints/rl_model_140000000_steps/module.pt does not exist
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+Traceback (most recent call last):
+  File "./openrl_ws/test.py", line 132, in <module>
+    agent.load(args.checkpoint)
+  File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
+    assert path.exists(), f"{path} does not exist"
+AssertionError: /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid/checkpoints/rl_model_150000000_steps/module.pt does not exist
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+Traceback (most recent call last):
+  File "./openrl_ws/test.py", line 132, in <module>
+    agent.load(args.checkpoint)
+  File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
+    assert path.exists(), f"{path} does not exist"
+AssertionError: /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid/checkpoints/rl_model_160000000_steps/module.pt does not exist
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+Traceback (most recent call last):
+  File "./openrl_ws/test.py", line 132, in <module>
+    agent.load(args.checkpoint)
+  File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
+    assert path.exists(), f"{path} does not exist"
+AssertionError: /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid/checkpoints/rl_model_170000000_steps/module.pt does not exist
+Importing module 'gym_38' (/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/gym_38.so)
+Setting GYM_USD_PLUG_INFO_PATH to /home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/linux-x86_64/usd/plugInfo.json
+PyTorch version 1.13.1+cu116
+Device count 1
+/home/gvlab/isaac_gym/isaacgym/python/isaacgym/_bindings/src/gymtorch
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+Using /home/gvlab/.cache/torch_extensions/py38_cu116 as PyTorch extensions root...
+Emitting ninja build file /home/gvlab/.cache/torch_extensions/py38_cu116/gymtorch/build.ninja...
+Building extension module gymtorch...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+ninja: no work to do.
+Not connected to PVD
++++ Using GPU PhysX
+Physics Engine: PhysX
+Physics Device: cuda:0
+GPU Pipeline: enabled
+Loading extension module gymtorch...
+Using seed: 5
+Setting seed: 5
+Using LeggedRobotField.__init__, num_obs and num_privileged_obs will be computed instead of assigned.
+record_video False
+Traceback (most recent call last):
+  File "./openrl_ws/test.py", line 132, in <module>
+    agent.load(args.checkpoint)
+  File "/home/gvlab/miniconda3/envs/mapush/lib/python3.8/site-packages/openrl/runners/common/rl_agent.py", line 197, in load
+    assert path.exists(), f"{path} does not exist"
+AssertionError: /home/gvlab/agnostic-MAPush/results/11-07-17_cuboid/checkpoints/rl_model_180000000_steps/module.pt does not exist
