@@ -1,0 +1,43 @@
+# Safe PPO Configuration
+# This config adds critical stability measures to prevent training collapse
+# Created to address value function divergence and NaN crashes in long training runs
+
+# Learning rates (reduced from 5e-3 to 3e-4 for stability)
+# Lower LR prevents large parameter updates that can cause divergence
+lr: 3e-4
+critic_lr: 3e-4
+
+# CRITICAL: Gradient clipping to prevent gradient explosion
+# Limits gradient norm to prevent single bad batch from destroying network
+# Without this, training is unstable after ~80M steps
+max_grad_norm: 0.5
+
+# CRITICAL: Advantage normalization
+# Normalizes advantages to have zero mean and unit variance
+# Makes training more robust to value function errors
+use_adv_normalize: true
+
+# Value normalization (keep enabled from original config)
+# Normalizes value targets for better critic training
+use_valuenorm: true
+
+# PPO clipping parameter (OpenRL default, making explicit)
+# Prevents policy from changing too drastically
+clip_param: 0.2
+
+# Episode and logging settings (unchanged)
+episode_length: 200
+run_dir: ./results/
+log_interval: 5
+
+# Policy architecture (unchanged)
+use_recurrent_policy: false
+use_joint_action_loss: false
+
+# Optional: Entropy coefficient for exploration
+# Prevents policy from becoming too deterministic too quickly
+# ent_coef: 0.01
+
+# Optional: Value loss coefficient
+# Controls relative importance of value loss vs policy loss
+# value_loss_coef: 0.5
