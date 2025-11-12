@@ -12,7 +12,7 @@ python ./openrl_ws/update_config.py --filepath $script_dir/config.py
 if [ $test_mode = False ]; then
     # train
     num_envs=500
-    num_steps=180000000
+    num_steps=100000000
     checkpoint=/None  # "/results/07-28-13_task1/checkpoints/rl_model_100000000_steps/module.pt"
 
     # Check if using HARL algorithms (HAPPO, HATRPO, HAA2C) or OpenRL (MAPPO)
@@ -29,6 +29,7 @@ if [ $test_mode = False ]; then
             train.num_env_steps "$num_steps" \
             train.episode_length 200 \
             train.log_interval 5 \
+            model.hidden_sizes "[256,256]" \
             env.task go1push_mid \
             env.headless True
         cd ..
