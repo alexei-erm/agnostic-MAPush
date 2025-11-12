@@ -1,0 +1,112 @@
+***********************************************
+****************** MID-LEVEL ******************
+***********************************************
+
+python ./openrl_ws/train.py  --num_envs $num_envs --train_timesteps $num_steps\
+    --algo mappo \
+    --config ./openrl_ws/cfgs/ppo.yaml \
+    --seed 1 \
+    --exp_name  $exp_name \
+    --task go1push_mid \
+    --use_tensorboard \
+    --checkpoint /None \
+    --headless \
+    --hidden_size 256 \
+    --layer_N 2
+
+
+***********************************************
+****************** UPPER-LEVEL ****************
+***********************************************
+
+- Trained with 130M checkpoint: ./results/models/mid/checkpoints/rl_model_130000000_steps/module.pt
+(change in mqe/envs/configs/go1_push_upper_config.py under control.command_network_path)
+
+python ./openrl_ws/train.py --algo ppo 
+    --task go1push_upper \
+    --train_timesteps 100000000 \
+    --num_envs 500 \
+    --use_tensorboard \
+    --headless \
+    --hidden_size 128 \
+    --layer_N 2 \
+    --seed 1
+
+- For Testing run :
+python ./openrl_ws/test.py --algo ppo \
+    --task go1push_upper \
+    --num_envs 1 \
+    --checkpoint ./results/models/baseline_mappo/upper/checkpoints/rl_model_100000000_steps/module.pt
+
+python ./openrl_ws/test.py --algo ppo \
+    --test_mode calculator \
+    --headless \
+    --task go1push_upper \
+    --num_envs 300 \
+    --checkpoint ./results/models/baseline_mappo/upper/checkpoints/rl_model_100000000_steps/module.pt
+
+
+UPPER-LEVEL CHECKPOINT TEST RESULTS (300 envs)
+=====================================
+
+Model: 10000000 steps
+  Success Rate: 0.1800 (18.00%)
+  Finished Time: 146.11 seconds
+  Collision Degree: 0.000312
+  Collaboration Degree: 0.7324
+
+Model: 20000000 steps
+  Success Rate: 0.8367 (83.67%)
+  Finished Time: 84.32 seconds
+  Collision Degree: 0.000386
+  Collaboration Degree: 0.8244
+
+Model: 30000000 steps
+  Success Rate: 0.8900 (89.00%)
+  Finished Time: 73.91 seconds
+  Collision Degree: 0.000413
+  Collaboration Degree: 0.8497
+
+Model: 40000000 steps
+  Success Rate: 0.9033 (90.33%)
+  Finished Time: 70.40 seconds
+  Collision Degree: 0.000470
+  Collaboration Degree: 0.8503
+
+Model: 50000000 steps
+  Success Rate: 0.9233 (92.33%)
+  Finished Time: 68.20 seconds
+  Collision Degree: 0.000403
+  Collaboration Degree: 0.8611
+
+Model: 60000000 steps
+  Success Rate: 0.9367 (93.67%)
+  Finished Time: 66.32 seconds
+  Collision Degree: 0.000405
+  Collaboration Degree: 0.8611
+
+Model: 70000000 steps
+  Success Rate: 0.8933 (89.33%)
+  Finished Time: 71.11 seconds
+  Collision Degree: 0.000413
+  Collaboration Degree: 0.8570
+
+Model: 80000000 steps
+  Success Rate: 0.9133 (91.33%)
+  Finished Time: 69.85 seconds
+  Collision Degree: 0.000646
+  Collaboration Degree: 0.8624
+
+Model: 90000000 steps
+  Success Rate: 0.9333 (93.33%)
+  Finished Time: 68.44 seconds
+  Collision Degree: 0.000395
+  Collaboration Degree: 0.8532
+
+Model: 100000000 steps
+  success rate: 0.9333333373069763
+  finished time: 67.6448745727539
+  collision degree: 0.00039800218655727804
+  collaboration degree: 0.8550388813018799
+
+Note: All tests exited with code 139 after collecting metrics
