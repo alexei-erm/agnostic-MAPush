@@ -1,6 +1,7 @@
 exp_name="cuboid"
 current_dir=$(pwd)
-algo="happo"  # Options: "happo", "hatrpo", "haa2c", "mappo"
+algo="happo"  # Options: "happo" (uses safe config), "hatrpo", "haa2c", "mappo"
+# Note: happo now uses happo_safe.yaml (original backed up as happo_original.yaml)
 script_path=$(realpath "${BASH_SOURCE[0]}")
 # script_path=$(realpath $0)
 script_dir=$(dirname "$script_path")
@@ -12,7 +13,7 @@ python ./openrl_ws/update_config.py --filepath $script_dir/config.py
 if [ $test_mode = False ]; then
     # train
     num_envs=500
-    num_steps=100000000
+    num_steps=200000000
     checkpoint=/None  # "/results/07-28-13_task1/checkpoints/rl_model_100000000_steps/module.pt"
 
     # Check if using HARL algorithms (HAPPO, HATRPO, HAA2C) or OpenRL (MAPPO)
@@ -29,6 +30,7 @@ if [ $test_mode = False ]; then
             --num_env_steps "$num_steps" \
             --episode_length 200 \
             --log_interval 5 \
+            --eval_interval 25 \
             --hidden_sizes "[256,256]" \
             --task go1push_mid \
             --headless True
@@ -74,18 +76,78 @@ if [ $test_mode = False ]; then
         fi
     else
         echo "Checkpoint testing for HARL algorithms will be done separately"
-        echo "Checkpoints are saved in: HARL/results/mapush/go1push_mid/$algo/"
+        echo "Checkpoints are saved in: results/mapush/go1push_mid/$algo/$exp_name/"
     fi
 
 else
-# test
-root_dir=$(dirname "$script_dir")
-filename="rl_model_110000000_steps/module.pt"
-test_checkpoint="$root_dir/checkpoints/$filename"
-python ./openrl_ws/test.py --num_envs 1 \
-        --algo "$algo" \
-        --task go1push_mid \
-        --checkpoint "$test_checkpoint" \
-        --test_mode viewer \
-#       --record_video
+    # test
+    root_dir=$(dirname "$script_dir")
+
+    # Check if using HARL algorithms (HAPPO, HATRPO, HAA2C) or OpenRL (MAPPO)
+    if [ "$algo" = "happo" ] || [ "$algo" = "hatrpo" ] || [ "$algo" = "haa2c" ]; then
+        # Test HARL models using the MODIFIED test.py (now supports HAPPO checkpoints!)
+        echo "Testing HARL algorithm: $algo"
+
+        # HARL checkpoints are in: results/mapush/go1push_mid/{algo}/{exp_name}/seed-{seed}-{timestamp}/models/
+        # Find the most recent checkpoint directory
+        harl_results_dir="$current_dir/results/mapush/go1push_mid/$algo/$exp_name"
+
+        # If testing from a copied results directory, use that path
+        if [ -d "$root_dir/models" ]; then
+            # Testing from copied results directory (e.g., results/.../task/train.sh)
+            model_dir="$root_dir/models"
+            echo "Using model directory from results: $model_dir"
+        elif [ -d "$harl_results_dir" ]; then
+            # Training was done, find latest seed directory
+            latest_seed_dir=$(ls -dt "$harl_results_dir"/seed-* 2>/dev/null | head -n 1)
+            if [ -z "$latest_seed_dir" ]; then
+                echo "Error: No HARL checkpoint directories found in $harl_results_dir"
+                exit 1
+            fi
+
+            # List available checkpoints
+            echo "Available checkpoints in $latest_seed_dir/models/:"
+            ls -d "$latest_seed_dir/models"/rl_model_*_steps 2>/dev/null || echo "  No checkpoints found"
+
+            # Use a specific checkpoint (modify this line to choose different checkpoint)
+            # Default: use the latest checkpoint
+            checkpoint_dir=$(ls -dt "$latest_seed_dir/models"/rl_model_*_steps 2>/dev/null | head -n 1)
+
+            if [ -z "$checkpoint_dir" ]; then
+                echo "Error: No checkpoint found in $latest_seed_dir/models/"
+                exit 1
+            fi
+
+            model_dir="$checkpoint_dir"
+            echo "Using checkpoint: $model_dir"
+        else
+            echo "Error: Cannot find HARL results directory: $harl_results_dir"
+            echo "Please check that training has completed or specify the correct path"
+            exit 1
+        fi
+
+        # Use the SAME test.py as MAPPO, just pass the directory instead of module.pt
+        # test.py now automatically detects HAPPO checkpoints and loads them!
+        /home/gvlab/miniconda3/envs/mapush/bin/python ./openrl_ws/test.py --num_envs 1 \
+                --algo "$algo" \
+                --task go1push_mid \
+                --checkpoint "$model_dir" \
+                --test_mode calculator \
+                --num_envs 300 \
+                --headless 
+        #       --record_video
+            # --test_mode viewer \
+
+    else
+        # Test OpenRL/MAPPO models
+        echo "Testing OpenRL algorithm: $algo"
+        filename="rl_model_110000000_steps/module.pt"
+        test_checkpoint="$root_dir/checkpoints/$filename"
+        python ./openrl_ws/test.py --num_envs 1 \
+                --algo "$algo" \
+                --task go1push_mid \
+                --checkpoint "$test_checkpoint" \
+                --test_mode viewer \
+        #       --record_video
+    fi
 fi

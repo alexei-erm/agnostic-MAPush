@@ -129,9 +129,50 @@ else:
     agent = MATAgent(net, use_wandb=args.use_wandb)
 
 if getattr(args, "checkpoint") is not None:
-    agent.load(args.checkpoint)
-    print("---------------------------------------------------------------------------")
-    print("Loaded checkpoint from: ", args.checkpoint)
+    # Convert to absolute path to avoid path resolution issues
+    checkpoint_path = Path(args.checkpoint).resolve()
+
+    # Check if this is a HAPPO checkpoint (directory with actor_agent*.pt files)
+    is_happo = False
+    if checkpoint_path.is_dir():
+        actor_files = list(checkpoint_path.glob("actor_agent*.pt"))
+        if len(actor_files) > 0:
+            is_happo = True
+            print("---------------------------------------------------------------------------")
+            print("Detected HAPPO checkpoint format")
+            print(f"Loading from directory: {checkpoint_path}")
+
+            # Load HAPPO actors directly into the network
+            # For MAPPO with 2 agents, we need to load both actor files
+            actor_files_sorted = sorted(actor_files)
+            print(f"Found {len(actor_files_sorted)} actor files: {[f.name for f in actor_files_sorted]}")
+
+            # Load each actor's state dict
+            for i, actor_file in enumerate(actor_files_sorted):
+                actor_state = torch.load(actor_file, map_location=args.rl_device)
+                # The network structure in OpenRL PPONet/MATNet has the actor
+                # We need to load the state dict into the appropriate part
+                if hasattr(net, 'actor'):
+                    if hasattr(net.actor, 'actors'):  # MATNet structure
+                        if i < len(net.actor.actors):
+                            net.actor.actors[i].load_state_dict(actor_state)
+                            print(f"  Loaded {actor_file.name} into actor {i}")
+                    else:  # PPONet structure - single shared actor
+                        if i == 0:  # Only load the first one for shared actor
+                            net.actor.load_state_dict(actor_state)
+                            print(f"  Loaded {actor_file.name} into shared actor")
+                elif hasattr(net, 'policy'):  # Alternative structure
+                    net.policy.load_state_dict(actor_state)
+                    print(f"  Loaded {actor_file.name} into policy")
+
+            print("---------------------------------------------------------------------------")
+
+    if not is_happo:
+        # Standard MAPPO checkpoint (single module.pt file)
+        # Use absolute path to avoid resolution issues
+        agent.load(str(checkpoint_path))
+        print("---------------------------------------------------------------------------")
+        print("Loaded checkpoint from: ", checkpoint_path)
     
 test_mode = "calculator"
 if getattr(args, "test_mode") is not None:
@@ -142,9 +183,10 @@ agent.set_env(env)  # The agent requires an interactive environment.
 obs = env.reset()  # Initialize the environment to obtain initial observations and environmental information.
 
 if test_mode == "calculator":
-    while not torch.all(env.init_reset_buf):
-        action, _ = agent.act(obs) 
-        obs, r, done, info = env.step(action)
+    with torch.no_grad():  # Prevent memory accumulation from gradient computation
+        while not torch.all(env.init_reset_buf):
+            action, _ = agent.act(obs)
+            obs, r, done, info = env.step(action)
     success_rate=torch.mean(env.init_finished_buf.to(torch.float))
     finished_time = torch.mean(env.init_episode_length_buf * env.dt)
     collision_degree = torch.mean(env.collision_degree_buf[env.init_finished_buf]/ env.init_episode_length_buf[env.init_finished_buf])
@@ -212,34 +254,36 @@ elif test_mode=="viewer":
         actual_env.video_frames = []
         actual_env.record_now = True
         print(f"Recording {NUM_EPISODES} consecutive episodes...")
-        while True:
-            action, _ = agent.act(obs)
-            obs, r, done, info = env.step(action)
-            if done.all():
-                running_count += 1
-                if torch.all(env.finished_buf):
-                    print(f"Episode {running_count}/{NUM_EPISODES}: success")
-                else:
-                    print(f"Episode {running_count}/{NUM_EPISODES}: fail")
-            if running_count == NUM_EPISODES:
-                print(f"Completed {NUM_EPISODES} episodes. Processing video...")
-                # Wait a moment to ensure last episode is stored
-                frames = actual_env.get_complete_frames()
-                if len(frames) == 0:
-                    print("WARNING: No frames captured! Check if recording is working properly.")
-                else:
-                    video_array = np.concatenate([np.expand_dims(frame, axis=0) for frame in frames ], axis=0).swapaxes(1, 3).swapaxes(2, 3)
-                    print(f"Video shape: {video_array.shape}")
-                    print(f"Video mean: {np.mean(video_array)}")
-                    # save_gif(video_array, 1 / env.dt, filename="test.gif")
-                    save_video(video_array, 1 / env.dt, filename=f"test_seed{SEED}_{NUM_EPISODES}eps.mp4")
-                break
+        with torch.no_grad():  # Prevent memory accumulation
+            while True:
+                action, _ = agent.act(obs)
+                obs, r, done, info = env.step(action)
+                if done.all():
+                    running_count += 1
+                    if torch.all(env.finished_buf):
+                        print(f"Episode {running_count}/{NUM_EPISODES}: success")
+                    else:
+                        print(f"Episode {running_count}/{NUM_EPISODES}: fail")
+                if running_count == NUM_EPISODES:
+                    print(f"Completed {NUM_EPISODES} episodes. Processing video...")
+                    # Wait a moment to ensure last episode is stored
+                    frames = actual_env.get_complete_frames()
+                    if len(frames) == 0:
+                        print("WARNING: No frames captured! Check if recording is working properly.")
+                    else:
+                        video_array = np.concatenate([np.expand_dims(frame, axis=0) for frame in frames ], axis=0).swapaxes(1, 3).swapaxes(2, 3)
+                        print(f"Video shape: {video_array.shape}")
+                        print(f"Video mean: {np.mean(video_array)}")
+                        # save_gif(video_array, 1 / env.dt, filename="test.gif")
+                        save_video(video_array, 1 / env.dt, filename=f"test_seed{SEED}_{NUM_EPISODES}eps.mp4")
+                    break
     else:
-        while True:
-            action, _ = agent.act(obs) 
-            obs, r, done, info = env.step(action)
-            if done.all():
-                if torch.all(env.finished_buf):
-                    print("success")
-                else:
-                    print("fail")
+        with torch.no_grad():  # Prevent memory accumulation
+            while True:
+                action, _ = agent.act(obs)
+                obs, r, done, info = env.step(action)
+                if done.all():
+                    if torch.all(env.finished_buf):
+                        print("success")
+                    else:
+                        print("fail")
